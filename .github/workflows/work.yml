@@ -16,7 +16,9 @@ jobs:
         run: |
           export LANG=en_US.UTF-8
           unset cd
-          brew upgrade autoasset/autoasset/autoasset
+          brew tap autoasset/autoasset
+          brew install autoasset/autoasset/autoasset
+
 
       - name: build_tag
         run: autoasset --config .autoasset/run-tags.yml --env .autoasset/env.yml
