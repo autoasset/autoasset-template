@@ -18,7 +18,10 @@ jobs:
           unset cd
           brew tap autoasset/autoasset
           brew install autoasset/autoasset/autoasset
-
+          brew install node
+          brew install --cask inkscape
+          brew install vips
+          brew install libpng
 
       - name: build_tag
         run: autoasset --config .autoasset/run-tags.yml --env .autoasset/env.yml
