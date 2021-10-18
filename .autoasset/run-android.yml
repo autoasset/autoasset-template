@@ -1,0 +1,78 @@
+---
+modes:
+  - tidy: clear-resources
+  - download: download-template
+  - tidy: create-yml
+  - tidy: copy-xml
+  - tidy: copy-hdpi
+  - tidy: copy-mdpi
+  - tidy: copy-xhdpi
+  - tidy: copy-xxhdpi
+  - tidy: copy-xxxdpi
+  - bash: cd publish-template-android && ./gradlew clean :library:uploadArchives
+  - config: send-message
+
+# 下载模块
+download:
+  gits:
+    - name: download-template
+      output: publish-template-android
+      # publish-template-android 发布模板仓库
+      # input: <#publish-template-flutter ssh#> git@github.com:autoasset/publish-template-android.git
+      branch: master
+
+configs:
+  - name: send-message
+    inputs:
+      - .autoasset/create-message-post.yml
+    variables:
+        users: ${AndroidUsers}
+        message: ${AndroidMessage}
+
+# 文件整理模块
+tidy:
+
+  # 移除列表
+  clears:
+    - name: clear-resources
+      inputs:
+        - publish-template-android
+
+  create:
+    - name: create-yml
+      output: publish-template-android/library/gradle.properties
+      input: .autoasset/gradle.properties
+
+  copies:
+    - name: copy-xml
+      output: publish-template-android/library/src/main/res/drawable
+      inputs:
+        - publish-template-khala/products/android/vector_template
+    
+    - name: copy-hdpi
+      output: publish-template-android/library/src/main/res/drawable-hdpi
+      inputs:
+        - .developer/drawable_hdpi
+        - .developer/drawable-hdpi
+    
+    - name: copy-mdpi
+      output: publish-template-android/library/src/main/res/drawable-mdpi
+      inputs:
+        - .developer/drawable_mdpi
+        - .developer/drawable-mdpi
+
+    - name: copy-xxxdpi
+      output: publish-template-android/library/src/main/res/drawable-xxxhdpi
+      inputs:
+        - .developer/drawable_xxxdpi
+        - .developer/drawable-xxxdpi
+
+    - name: copy-xhdpi
+      output: publish-template-android/library/src/main/res/drawable-xhdpi
+      inputs:
+        - publish-template-khala/products/android/x2
+
+    - name: copy-xxhdpi
+      output: publish-template-android/library/src/main/res/drawable-xxhdpi
+      inputs:
+        - publish-template-khala/products/android/x3

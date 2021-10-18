@@ -1,0 +1,30 @@
+# https://docs.gitlab.com/ee/ci/variables/predefined_variables.html
+
+variables:
+  GIT_STRATEGY: none
+  CI_REPOSITORY_SSH_URL: git@${CI_SERVER_HOST}:${CI_PROJECT_PATH}.git
+  main_ui_branch_name: master
+
+stages:
+  - setup_env
+  - build_tag
+
+setup_env:
+  stage: setup_env
+  when: always
+  script:
+      - export LANG=en_US.UTF-8
+      - unset cd
+      - brew upgrade autoasset/autoasset/autoasset
+      - rm -rf project
+      
+build_tag:
+  stage: build_tag
+  cache: {}
+  when: always
+  only: 
+    - master
+    - main
+  script:
+      - git clone --single-branch --depth 1 --branch $main_ui_branch_name $CI_REPOSITORY_SSH_URL project && cd project
+      - autoasset --config .autoasset/run-tags.yml --env .autoasset/env.yml

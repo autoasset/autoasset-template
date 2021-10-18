@@ -1,0 +1,73 @@
+---
+modes:
+  - tidy: clear-resources
+  - xcassets
+  - iconfonts
+  - tidy: copy-codes
+
+# 文件整理模块
+tidy:
+  # 移除列表
+  clears:
+    - name: clear-resources
+      inputs:
+        - Sources
+ 
+  copies:
+    - name: copy-codes
+      output: Sources/codes
+      inputs:
+        - ${iOSEXCodesPath}
+
+iconfonts:
+  - package: publish-template-khala/products/ios/iconfont
+    font:
+        type: ttf
+    iOS: 
+        bundle: ${iOSDataBundleName}
+        dataName: iconfont
+        output: ./Sources/codes
+
+# 资源打包模块
+xcassets:
+
+  template:
+    output: ./Sources/codes
+
+  colors:
+    - output: Sources/Resources/colors.xcassets
+      space: display-p3
+      inputs:
+        - .developer/colors
+
+  datas:
+    - output: ./Sources/Resources/datas.xcassets
+      bundle_name: ${iOSDataBundleName}
+      inputs:
+        - publish-template-khala/products/ios/iconfont/iconfont.ttf
+
+  gifs:
+    - output: ./Sources/Resources/gifs.xcassets
+      bundle_name: ${iOSGIFBundleName}
+      inputs:
+        - publish-template-khala/products/ios/gif
+
+  images:
+    - output: Sources/Resources/icon.xcassets
+      bundle_name: ${iOSIconBundleName}
+      contents: .developer/contents/images
+      prefix: ${iOSPrefix}
+      inputs:
+        - publish-template-khala/products/ios/icon
+
+    - output: Sources/Resources/icon.xcassets
+      bundle_name: ${iOSIconBundleName}
+      contents: .developer/contents/images
+      prefix: ${iOSPrefix}
+      properties:
+          # 启用保留矢量格式数据, 默认为 true
+          preserves_vector_representation: true
+          # render as
+          template_rendering_intent: template
+      inputs:
+        - publish-template-khala/products/ios/vector_template

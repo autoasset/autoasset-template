@@ -1,0 +1,49 @@
+---
+modes:
+  - tidy: clear-resources
+  - download: download-template
+  - tidy: create-yml
+  - iconfonts
+  - bash: cd publish-template-flutter && flutter pub get && flutter pub publish -f
+  - config: send-message
+
+configs:
+  - name: send-message
+    inputs:
+      - .autoasset/create-message-post.yml
+    variables:
+        users: ${FlutterUsers}
+        message: ${FlutterMessage}
+
+# 下载模块
+download:
+  gits:
+    - name: download-template
+      output: publish-template-flutter
+      # publish-template-flutter 发布模板仓库
+      # input: <#publish-template-flutter ssh#> git@github.com:autoasset/publish-template-flutter.git
+      branch: master
+
+# 文件整理模块
+tidy:
+  # 移除列表
+  clears:
+    - name: clear-resources
+      inputs:
+        - publish-template-flutter
+
+  create:
+    - name: create-yml
+      output: publish-template-flutter/pubspec.yaml
+      input: .autoasset/pubspec.yaml
+
+iconfonts:
+  - package: publish-template-khala/products/flutter/iconfont
+    font:
+        output: publish-template-flutter/resources/fonts/${FlutterPackageName}.ttf
+        type: ttf
+    flutter: 
+        font_family: ${FlutterPackageName}
+        font_package: ${FlutterPackageName}
+        class_name: ${FlutterClassName}
+        output: publish-template-flutter/lib/${FlutterPackageName}.dart

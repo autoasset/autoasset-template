@@ -1,0 +1,10 @@
+# Default ignored files
+/.idea
+assets/
+
+publish-template-khala/
+publish-template-flutter/
+publish-template-android/
+
+template-assets/
+Autoasset

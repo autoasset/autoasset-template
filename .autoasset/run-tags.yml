@@ -1,0 +1,44 @@
+---
+modes:
+  - tidy: clear-assets
+  - download: download-khala
+  - tidy: create-khala-config
+  - bash: cd publish-template-khala && yarn build
+  - config: run-iOS
+  - config: run-flutter
+  - config: run-android
+
+# 文件整理模块
+tidy:
+  # 移除列表
+  clears:
+    - name: clear-assets
+      inputs:
+        - assets
+        - publish-template-khala
+
+  create:
+    - name: create-khala-config
+      output: publish-template-khala/src/config.json
+      input: .autoasset/Khala.json
+
+# 下载模块
+download:
+  gits:
+    - name: download-khala
+      output: publish-template-khala
+      input: git@github.com:autoasset/publish-template-khala.git
+      branch: master
+
+configs:
+  - name: run-iOS
+    inputs:
+      - .autoasset/run-iOS.yml
+
+  - name: run-android
+    inputs:
+      - .autoasset/run-android.yml
+
+  - name: run-flutter
+    inputs:
+      - .autoasset/run-flutter.yml

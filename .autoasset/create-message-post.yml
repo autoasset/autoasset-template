@@ -1,0 +1,4 @@
+---
+modes:
+  # 消息发送命令
+  # - bash: wechat '${users}' '${message}'

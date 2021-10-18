@@ -1,0 +1,24 @@
+name: ${FlutterPackageName}
+description: A new Flutter package.
+version: ${Version}
+author: author<author@author.cn>
+homepage: # homepage
+publish_to: $ homepage url
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+   fonts:
+     - family: ${FlutterPackageName}
+       fonts:
+         - asset: resources/fonts/${FlutterPackageName}.ttf

@@ -1,0 +1,38 @@
+---
+modes:
+  - config: create-xcassets
+  - config: create-podspec
+  - config: create-spm
+  - cocoapods
+  - config: send-message
+
+variables:
+  timeNow: ${autoasset.date.now}
+
+configs:
+  - name: create-spm
+    inputs:
+      - .autoasset/create-spm.yml
+  
+  - name: create-xcassets
+    inputs:
+      - .autoasset/create-xcassets.yml
+
+  - name: send-message
+    inputs:
+      - .autoasset/create-message-post.yml
+    variables:
+        users: ${iOSUsers}
+        message: ${iOSMessage}
+
+  - name: create-podspec
+    inputs:
+      - .autoasset/create-podspec.yml
+
+# cocoapods:
+#   podspec: ${iOSPackageName}.podspec
+#   git:
+#     pushToTag: true
+#     commitMessage: "[ci skip] tag: ${Version}, date: ${timeNow}"
+#   trunk:
+#     repo: ${iOSCocoapodsTrunkRepo}

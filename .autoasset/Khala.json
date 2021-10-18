@@ -1,0 +1,50 @@
+{
+    "inputs": [
+        ".."
+    ],
+
+    "exclude": [
+        "../.autoasset",
+        "../Sources",
+        "../publish-template-khala",
+        "../publish-template-android",
+        "../publish-template-flutter"        
+    ],
+
+    "outputs": {
+        "gif2x": "./coverter/gif2x",
+        "gif3x": "./coverter/gif3x",
+        "icon2x": "./coverter/icon2x",
+        "icon3x": "./coverter/icon3x",
+        "svg2pdf": "./coverter/svg2pdf",
+        "svg2xml": "./coverter/svg2xml",
+        "custom_iconfont_family": "${recommend.package.name(.camelCase)}Iconfont",
+        "svg2custom_iconfont": "./coverter/svg2custom_iconfont",
+        "svg2iconfont": "./coverter/svg2iconfont",
+        "pdf": "./coverter/pdf",
+        "svg": "./coverter/svg",
+        "other": "./coverter/other"
+    },
+
+    "products": {
+        "ios": {
+            "vector_template": "./products/ios/vector_template",
+            "iconfont": "./products/ios/iconfont",
+            "icon": "./products/ios/icon",
+            "gif":"./products/ios/gif"
+        },
+        "android": {
+            "build_settings": {
+                "copy_2x_inputs": ["../.developer/drawable_xdpi"],
+                "copy_3x_inputs": ["../.developer/drawable_xxdpi"]
+            },
+            "vector_template": "./products/android/vector_template",
+            "x2": "./products/android/x2",
+            "x3": "./products/android/x3"
+        }, 
+        "flutter": {
+            "iconfont": "./products/flutter/iconfont"
+        }
+    }
+
+}

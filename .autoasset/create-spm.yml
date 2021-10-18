@@ -1,0 +1,10 @@
+---
+modes:
+  - tidy: create-file
+
+# 文件整理模块
+tidy:
+  create:
+    - name: create-file
+      output: Package.swift
+      input: .autoasset/Package.swift

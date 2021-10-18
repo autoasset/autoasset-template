@@ -1,0 +1,10 @@
+---
+modes:
+  - tidy: create-podspec
+
+# 文件整理模块
+tidy:
+  create:
+    - name: create-podspec
+      output: ${iOSPackageName}.podspec
+      input: .autoasset/app.podspec
