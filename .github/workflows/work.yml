@@ -11,18 +11,25 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-
       - name: setup_env
         run: |
+          export LANG=en_US.UTF-8
+          unset cd
           brew update
-          brew install caskformula/caskformula/inkscape
+          
+      - name: setup_env
+        run: | 
+          brew tap autoasset/autoasset
+          brew install autoasset/autoasset/autoasset
+          
+      - name: inkscape
+        run: brew cask install inkscape
+
+      - name: khala-env
+        run: |
           brew install node
           brew install vips
           brew install libpng
-          export LANG=en_US.UTF-8
-          unset cd
-          brew tap autoasset/autoasset
-          brew install autoasset/autoasset/autoasset
 
       - name: build_tag
         run: autoasset --config .autoasset/run-tags.yml --env .autoasset/env.yml
