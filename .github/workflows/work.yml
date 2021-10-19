@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
 
     steps:
       - uses: actions/checkout@v2
@@ -17,7 +17,7 @@ jobs:
           unset cd
           brew update
           
-      - name: setup_env
+      - name: autoasset
         run: | 
           brew tap autoasset/autoasset
           brew install autoasset/autoasset/autoasset
