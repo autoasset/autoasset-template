@@ -14,14 +14,14 @@ jobs:
 
       - name: setup_env
         run: |
-          export LANG=en_US.UTF-8
-          unset cd
-          brew tap autoasset/autoasset
-          brew install autoasset/autoasset/autoasset
           brew install node
           brew install --cask inkscape
           brew install vips
           brew install libpng
+          export LANG=en_US.UTF-8
+          unset cd
+          brew tap autoasset/autoasset
+          brew install autoasset/autoasset/autoasset
 
       - name: build_tag
         run: autoasset --config .autoasset/run-tags.yml --env .autoasset/env.yml
