@@ -27,7 +27,7 @@ download:
   gits:
     - name: download-khala
       output: publish-template-khala
-      input: git@github.com:autoasset/publish-template-khala.git
+      input: https://github.com/autoasset/publish-template-khala.git
       branch: master
 
 configs:
