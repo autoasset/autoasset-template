@@ -7,10 +7,16 @@ on:
 
 jobs:
   build:
-    runs-on: macos-latest
-
+    name: run on node ${{ matrix.node_version }} and ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        node_version: ['14']
+        os: [macOS-latest]
+        
     steps:
       - uses: actions/checkout@v2
+        
       - name: setup_env
         run: |
           export LANG=en_US.UTF-8
@@ -30,6 +36,11 @@ jobs:
           brew install node
           brew install vips
           brew install libpng
+          
+      - name: Use Node.js ${{ matrix.node_version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node_version }}
 
       - name: build_tag
         run: autoasset --config .autoasset/run-tags.yml --env .autoasset/env.yml
